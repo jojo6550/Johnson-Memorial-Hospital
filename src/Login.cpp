@@ -1,91 +1,107 @@
+#include <iostream>
+#include <fstream>
 #include "../Header Files/Login.h"
 
-string Login::encrypt(string password) {
-    string newPassword = "";
+std::string Login::encrypt(std::string password) {
+    std::string newPassword = "";
     for (char c : password) {
         newPassword += c + 3;
     }
     return newPassword;
 }
-string Login::decrypt(string password) {
-    string newPassword = "";
+
+std::string Login::decrypt(std::string password) {
+    std::string newPassword = "";
     for (char c : password) {
         newPassword += c - 3;
     }
     return newPassword;
 }
 
-// Handles user registration
 void Login::reg() {
-    string username, password, verifyPassword;
+    std::string username, password, verifyPassword;
 
-    // Prompt the user to enter a username
-    cout << "Enter username: ";
-    getline(cin, username);
+    std::cout << "Enter username: ";
+    getline(std::cin, username);
 
-    // Prompt the user to enter a password with at least 8 characters
-    cout << "Enter password using 8+ characters (e.g. p@SsW0$d): ";
-    cin >> password;
+    std::cout << "Enter password using 8+ characters (e.g. p@SsW0$d): ";
+    std::cin >> password;
+    std::cin.ignore(); // Clear the input buffer
 
-    // Prompt the user to verify the password
-    cout << "Enter password to verify: ";
-    cin >> verifyPassword;
+    std::cout << "Enter password to verify: ";
+    std::cin >> verifyPassword;
+    std::cin.ignore(); // Clear the input buffer
 
-    // Ensure the password is at least 8 characters long
     while (password.size() < 8) {
-        cout << "Password was too short." << endl;
-        cout << "Enter password using 8+ characters (e.g. p@SsW0$d): ";
-        cin >> password;
-        cout << "Enter password to verify: ";
-        cin >> verifyPassword;
+        std::cout << "Password was too short." << std::endl;
+        std::cout << "Enter password using 8+ characters (e.g. p@SsW0$d): ";
+        std::cin >> password;
+        std::cin.ignore(); // Clear the input buffer
+        std::cout << "Enter password to verify: ";
+        std::cin >> verifyPassword;
+        std::cin.ignore(); // Clear the input buffer
     }
 
-    // Ensure the password and verification match
     while (password != verifyPassword) {
-        cout << "Passwords do not match." << endl;
-        cout << "Enter password using 8+ characters (e.g. p@SsW0$d): ";
-        cin >> password;
-        cout << "Enter password to verify: ";
-        cin >> verifyPassword;
+        std::cout << "Passwords do not match." << std::endl;
+        std::cout << "Enter password using 8+ characters (e.g. p@SsW0$d): ";
+        std::cin >> password;
+        std::cin.ignore(); // Clear the input buffer
+        std::cout << "Enter password to verify: ";
+        std::cin >> verifyPassword;
+        std::cin.ignore(); // Clear the input buffer
     }
 
-    // Check if the username already exists in the users
-    ifstream infile("users.txt");
-    string line;
+    std::ifstream infile("users.txt");
+    if (!infile.is_open()) {
+        std::cerr << "Error: Unable to open file 'users.txt' for reading.\n";
+        return;
+    }
+
+    std::string line;
     while (getline(infile, line)) {
         if (line.find(username + ":") == 0) {
-            cout << "User exists. Try again." << endl;
+            std::cout << "User  exists. Try again." << std::endl;
             infile.close();
             return;
         }
     }
+    infile.close();
 
-    // Save the new user credentials to the users
-    ofstream outfile("users.txt", ios::app);
-    outfile << username << ":" << decrypt(password) << endl;
+    std::ofstream outfile("users.txt", std::ios::app);
+    if (!outfile.is_open()) {
+        std::cerr << "Error: Unable to open file 'users.txt' for writing.\n";
+        return;
+    }
+    outfile << username << ":" << encrypt(password) << std::endl;
     outfile.close();
 
-    cout << "User  registered successfully!\n";
-    infile.close();
+    std::cout << "User  registered successfully!\n";
 }
 
-void Login::login(){
-    string username, password;
-    cout<<"Enter username: ";
-    getline(cin, username);
-    cout<<"Enter password: ";
-    cin>>password;
-    // Check credentials
-    ifstream infile("users.txt");
-    string line;
+void Login::login() {
+    std::string username, password;
+    std::cout << "Enter username: ";
+    getline(std::cin, username);
+    std::cout << "Enter password: ";
+    std::cin >> password;
+    std::cin.ignore(); // Clear the input buffer
+
+    std::ifstream infile("users.txt");
+    if (!infile.is_open()) {
+        std::cerr << "Error: Unable to open file 'users.txt' for reading.\n";
+        return;
+    }
+
+    std::string line;
     bool loginSuccessful = false;
     while (getline(infile, line)) {
         size_t delimiter = line.find(":");
-        string fileUsername = line.substr(0, delimiter);
-        string filePassword = line.substr(delimiter + 1);
+        std::string fileUsername = line.substr(0, delimiter);
+        std::string filePassword = line.substr(delimiter + 1);
 
         if (fileUsername == username && filePassword == decrypt(password)) {
-            cout << "Login successful! Welcome, " << username << ".\n";
+            std::cout << "Login successful! Welcome, " << username << ".\n";
             loginSuccessful = true;
             break;
         }
@@ -93,7 +109,6 @@ void Login::login(){
     infile.close();
 
     if (!loginSuccessful) {
-        cout << "Invalid username or password. Please try again.\n";
+        std::cout << "Invalid username or password. Please try again.\n";
     }
-
 }
