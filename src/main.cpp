@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <limits>
 #include "../Header Files/Login.h"
 using namespace std;
         
@@ -20,18 +21,27 @@ class Patient{
             cin >> lastName;
             cout << "Enter Date of Birth (dd/mm/yyyy): ";
             cin >> dob;
-            cout << "Enter Age: ";
-            cin >> age;
+            while(true){
+                cout << "Enter Age: ";
+                if(cin >> age && age >= 0){
+                    break;
+                } else {
+                    cout << "Invalid input. Please enter a valid age." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+                
+            }
             cout << "Enter Phone Number (xxx-xxx-xxxx): ";
             cin >> phoneNumber;
             cout<<"******************************************************"<<endl;
-            cin.ignore();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the entire input buffer
             cout << "Enter Next of Kin Name: ";
-            getline(cin, nextOfKinName);
+            getline(cin, nextOfKinName); // Now this will work correctly
             cout << "Enter Next of Kin Phone Number (xxx-xxx-xxxx): ";
             cin >> nextOfKinNumber;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer after cin
             cout << "Enter Date of Admission (dd/mm/yyyy): ";
-            cout<<"******************************************************"<<endl;
             cin >> dateOfAdmission;
             cout << "Enter Date of Release (dd/mm/yyyy): ";
             cin >> dateOfRelease;
