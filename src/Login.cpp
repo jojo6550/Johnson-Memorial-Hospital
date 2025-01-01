@@ -49,8 +49,8 @@ void Login::reg() {
         cin >> verifyPassword;
     }
 
-    // Check if the username already exists in the database
-    ifstream infile("database.txt");
+    // Check if the username already exists in the users
+    ifstream infile("users.txt");
     string line;
     while (getline(infile, line)) {
         if (line.find(username + ":") == 0) {
@@ -60,8 +60,8 @@ void Login::reg() {
         }
     }
 
-    // Save the new user credentials to the database
-    ofstream outfile("database.txt", ios::app);
+    // Save the new user credentials to the users
+    ofstream outfile("users.txt", ios::app);
     outfile << username << ":" << decrypt(password) << endl;
     outfile.close();
 
@@ -76,7 +76,7 @@ void Login::login(){
     cout<<"Enter password: ";
     cin>>password;
     // Check credentials
-    ifstream infile("database.txt");
+    ifstream infile("users.txt");
     string line;
     bool loginSuccessful = false;
     while (getline(infile, line)) {
