@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iostream>
 #include "../Header Files/Login.h"
 
 std::string Login::encrypt(std::string password) {
