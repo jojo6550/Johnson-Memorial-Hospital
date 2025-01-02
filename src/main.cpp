@@ -11,21 +11,24 @@
 class Staff{
     private:
         std::string name ,phoneNumber, staffId;
-        std::vector<std::string> qualifications = {
+        std::vector<std::string> qualificationsList = {
             "OBGYN", "Family Physician", "Oncologist",
             "Cardiologist", "Gastroenterologist", "Dermatlogist", 
-            "Neurologist", "Pediatrician"};
+            "Neurologist", "Pediatrician", "General"};
+        std::vector<std::string> qualification = {};
 
         char role;
     public:
         Staff(){
             
         }
-        Staff(std::string n, std::string pn, std::string sId, char r){
+        Staff(std::string n, std::string pn, std::string sId, char r, std::vector <std::string> q){
             name = n;
             phoneNumber = pn;
             staffId = sId;
             role = r;
+            qualification = q;
+
         }
 
         bool validatePhoneNumberFormat(const std::string& phoneNumber) {
@@ -87,8 +90,14 @@ class Staff{
                     std::cout<<"Invalid staff ID length.\n";
                 }
             }
+            std::cout << "Enter qualifications: " << std::endl;
+            for(size_t i=0; i<qualificationsList.size(); i++){
+                    std::cout<<i+1<<" "<<qualificationsList[i]<<std::endl;
+                    
+            }
+            std::cout<<"Select all that appply: "<< std::endl;
+            //add data entry
         }
-
 };
 
 int main(){
