@@ -2,7 +2,23 @@
 #include <fstream>
 #include <iostream>
 #include "../Header Files/Login.h"
-
+/**
+ * @brief Registers a new user by prompting for username and password.
+ *
+ * This function handles the user registration process. It prompts the user to enter
+ * a username and password, verifies the password, checks for existing usernames,
+ * and stores the new user's credentials in a file.
+ *
+ * The function performs the following steps:
+ * 1. Prompts for and validates username input.
+ * 2. Prompts for and validates password input (minimum 8 characters).
+ * 3. Verifies the password by asking the user to enter it twice.
+ * 4. Checks if the username already exists in the users file.
+ * 5. If the username is unique, encrypts the password and stores the credentials.
+ *
+ * @note This function does not take any parameters or return any value.
+ *       It interacts with the user via console input/output and modifies the users file.
+ */
 std::string Login::encrypt(std::string password) {
     std::string newPassword = "";
     for (char c : password) {
