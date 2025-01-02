@@ -322,34 +322,34 @@ bool Patient::validateDateFormat(const std::string& date) {
         // Define the file path
     std::string filePath = "Patient Data/" + firstName + " " + lastName + " " + patientId + "/patient_data.txt";
 
-    // Ensure the directory exists (manually)
-    std::string command = "mkdir \"Patient Data\\" + firstName + " " + lastName + " " + patientId + "\"";
-    system(command.c_str());
+        // Ensure the directory exists (manually)
+        std::string command = "mkdir \"Patient Data\\" + firstName + " " + lastName + " " + patientId + "\"";
+        system(command.c_str());
 
-        // Open the file for writing
-        std::ofstream outfile(filePath);
-        if (!outfile.is_open()) {
-            std::cerr << "Error: Unable to open file for writing.\n";
-            return;
+            // Open the file for writing
+            std::ofstream outfile(filePath);
+            if (!outfile.is_open()) {
+                std::cerr << "Error: Unable to open file for writing.\n";
+                return;
+            }
+
+            // Write patient data to the file
+            outfile << "First Name: " << firstName << std::endl;
+            outfile << "Last Name: " << lastName << std::endl;
+            outfile << "Date of Birth: " << dob << std::endl;
+            outfile << "Age: " << age << std::endl;
+            outfile << "Gender: " << gender << std::endl;
+            outfile << "Phone Number: " << phoneNumber << std::endl;
+            outfile << "Next of Kin Name: " << nextOfKinName << std::endl;
+            outfile << "Next of Kin Phone Number: " << nextOfKinNumber << std::endl;
+            outfile << "Date of Admission: " << dateOfAdmission << std::endl;
+            outfile << "Date of Release: " << dateOfRelease << std::endl;
+            outfile << "Ward ID: " << wardID << std::endl;
+            outfile << "Patient ID: " << patientId << std::endl;
+
+            outfile.close();
+            std::cout << "Patient data saved to " << filePath << std::endl;
         }
-
-        // Write patient data to the file
-        outfile << "First Name: " << firstName << std::endl;
-        outfile << "Last Name: " << lastName << std::endl;
-        outfile << "Date of Birth: " << dob << std::endl;
-        outfile << "Age: " << age << std::endl;
-        outfile << "Gender: " << gender << std::endl;
-        outfile << "Phone Number: " << phoneNumber << std::endl;
-        outfile << "Next of Kin Name: " << nextOfKinName << std::endl;
-        outfile << "Next of Kin Phone Number: " << nextOfKinNumber << std::endl;
-        outfile << "Date of Admission: " << dateOfAdmission << std::endl;
-        outfile << "Date of Release: " << dateOfRelease << std::endl;
-        outfile << "Ward ID: " << wardID << std::endl;
-        outfile << "Patient ID: " << patientId << std::endl;
-
-        outfile.close();
-        std::cout << "Patient data saved to " << filePath << std::endl;
-    }
     void Patient::displayPatientData() {
         std::string firstName, lastName, patientId;
 
@@ -362,7 +362,7 @@ bool Patient::validateDateFormat(const std::string& date) {
         std::cin >> patientId;
 
         // Construct the file path based on the patient details
-        std::string filePath = "Johnson Memorial Hospital/src/outputPatient Data/" + firstName + " " + lastName + " " + patientId + "/patient_data.txt";
+        std::string filePath = "Patient Data/" + firstName + " " + lastName + " " + patientId + "/patient_data.txt";
 
         // Open the file for reading
         std::ifstream infile(filePath);
