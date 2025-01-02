@@ -4,22 +4,27 @@
 #include <limits>
 #include <regex>
 #include <cstdlib>
+#include <vector>
 #include "../Header Files/Login.h"
 #include "../Header Files/Patient.h"
 
 class Staff{
     private:
-        std::string name ,phoneNumber, staffId, qualifications;
+        std::string name ,phoneNumber, staffId;
+        std::vector<std::string> qualifications = {
+            "OBGYN", "Family Physician", "Oncologist",
+            "Cardiologist", "Gastroenterologist", "Dermatlogist", 
+            "Neurologist", "Pediatrician"};
+
         char role;
     public:
         Staff(){
             
         }
-        Staff(std::string n, std::string pn, std::string sId, std::string q, char r){
+        Staff(std::string n, std::string pn, std::string sId, char r){
             name = n;
             phoneNumber = pn;
             staffId = sId;
-            qualifications = q;
             role = r;
         }
 
