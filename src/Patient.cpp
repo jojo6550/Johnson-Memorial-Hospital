@@ -1,110 +1,183 @@
 #include "../Header Files/Patient.h"
+/*
+ Function to validate the format of a date string.
+ The expected format is "DD/MM/YYYY", where:
+ - DD is a two-digit day (01 to 31)
+ - MM is a two-digit month (01 to 12)
+ - YYYY is a four-digit year
 
+ Parameters:
+ - date: A constant reference to a string representing the date to be validated.
+
+ Returns:
+ - A boolean value: true if the date string matches the expected format, 
+   false otherwise.
+*/
 bool Patient::validateDateFormat(const std::string& date) {
-            std::regex pattern(R"(^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$)");
-            return regex_match(date, pattern);
-        }
+    // Regular expression pattern to match the date format "DD/MM/YYYY"
+    std::regex pattern(R"(^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$)");
+    
+    // Check if the input date string matches the defined regex pattern
+    return regex_match(date, pattern);
+}
+/*
+ Function to validate the format of a phone number string.
+ The expected format is "(XXX)-XXX-XXXX", where:
+ - XXX is a three-digit area code enclosed in parentheses
+ - The area code is followed by a hyphen (-)
+ - The next three digits represent the local exchange code
+ - The local exchange code is followed by another hyphen (-)
+ - Finally, the last four digits represent the subscriber number
+
+ Parameters:
+ - phoneNumber: A constant reference to a string representing the phone number to be validated.
+
+ Returns:
+ - A boolean value: true if the phone number string matches the expected format, 
+   false otherwise.
+*/
 bool Patient::validatePhoneNumberFormat(const std::string& phoneNumber) {
-            std::regex phonePattern(R"(^\(\d{3}\)-\d{3}-\d{4}$)");
-            return regex_match(phoneNumber, phonePattern);
-        }
-void Patient::setPatientData(){
-        std::cout<<"******************************************************"<<std::endl;
-        std::cout << "Enter First Name: ";
-        std::cin >> firstName;
-        std::cout << "Enter Last Name: ";
-        std::cin >> lastName;
-        //Enters date of birth
-        while (true){
-            std::cout << "Enter Date of Birth (dd/mm/yyyy): ";
-            if (std::cin>>dob && validateDateFormat(dob)){
-                break;
-            } else {
-                std::cout << "Invalid date format." <<std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-        }
-        //Enter age
-        while(true){
-            std::cout << "Enter Age: ";
-            if(std::cin >> age && age >= 0){
-                break;
-            } else {
-                std::cout << "Invalid input. Please enter a valid age." << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-            
-        }
-        //Enter gender
-        while(true){
-            std::cout << "Enter Gender (M/F): ";
-            if (std::cin>> gender && (gender == 'M' || gender == 'F')){
-                break;
-            } else {
-                std::cout << "Invalid input. Please enter a valid gender." << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    // Regular expression pattern to match the phone number format "(XXX)-XXX-XXXX"
+    std::regex phonePattern(R"(^\(\d{3}\)-\d{3}-\d{4}$)");
+    
+    // Check if the input phone number string matches the defined regex pattern
+    return regex_match(phoneNumber, phonePattern);
+}
+/*
+ Function to collect and set patient data through user input.
+ This function prompts the user to enter various details about the patient,
+ including their name, date of birth, age, gender, phone number, next of kin information,
+ and admission/release dates. It validates the input format for date and phone number
+ and ensures that the age is a non-negative integer.
 
-            }
-        }
-        //Enter phone number
-        while (true){
-        std::cout << "Enter Phone Number (xxx-xxx-xxxx): ";
-            if (std::cin >> phoneNumber && validatePhoneNumberFormat(phoneNumber)){
-                break;
-            } else {
-                std::cout << "Invalid phone number format." <<std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-        }
-        std::cout<<"******************************************************"<<std::endl;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the entire input buffer
-        std::cout << "Enter Next of Kin Name: ";
-        getline(std::cin, nextOfKinName); // Now this will work correctly
-        
-        //Next of Kin Phone Number
-        while (true){
-            std::cout << "Enter Next of Kin Phone Number (xxx-xxx-xxxx): ";
-            if (std::cin >> nextOfKinNumber && validatePhoneNumberFormat(nextOfKinNumber)){
-                break;
-            } else {
-                std::cout << "Invalid phone number format." <<std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-        }
-        std::cout<<"******************************************************"<<std::endl;
+ The function performs the following steps:
+ 1. Prompts for the patient's first and last name.
+ 2. Prompts for the date of birth and validates the format (dd/mm/yyyy).
+ 3. Prompts for the age and ensures it is a non-negative integer.
+ 4. Prompts for the gender and ensures it is either 'M' or 'F'.
+ 5. Prompts for the phone number and validates the format (xxx-xxx-xxxx).
+ 6. Prompts for the next of kin's name and phone number, validating the phone number format.
+ 7. Prompts for the date of admission and validates the format (dd/mm/yyyy).
+ 8. Prompts for the date of release and validates the format (dd/mm/yyyy).
+ 9. Prompts for the ward ID and patient ID.
 
+ The function uses loops to repeatedly prompt the user until valid input is provided,
+ and it clears the input buffer as necessary to handle invalid inputs.
+*/
+void Patient::setPatientData() {
+    std::cout << "******************************************************" << std::endl;
 
-        while (true){
-            std::cout << "Enter Date of Admission (dd/mm/yyyy): ";
-            if (std::cin>>dateOfAdmission && validateDateFormat(dateOfAdmission)){
-                break;
-            } else {
-                std::cout << "Invalid date format." <<std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
+    // Prompt for first name
+    std::cout << "Enter First Name: ";
+    std::cin >> firstName;
+
+    // Prompt for last name
+    std::cout << "Enter Last Name: ";
+    std::cin >> lastName;
+
+    // Enter date of birth with validation
+    while (true) {
+        std::cout << "Enter Date of Birth (dd/mm/yyyy): ";
+        if (std::cin >> dob && validateDateFormat(dob)) {
+            break; // Exit loop if valid
+        } else {
+            std::cout << "Invalid date format." << std::endl;
+            std::cin.clear(); // Clear error state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
         }
-        while (true){
-        std::cout << "Enter Date of Release (dd/mm/yyyy): ";
-            if (std::cin>>dateOfRelease && validateDateFormat(dateOfRelease)){
-                break;
-            } else {
-                std::cout << "Invalid date format." <<std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-        }
-        std::cout << "Enter Ward ID: ";
-        std::cin >> wardID;
-        std::cout << "Enter Patient ID: ";
-        std::cin >> patientId;
-        std::cout<<"******************************************************"<<std::endl;
     }
+
+    // Enter age with validation
+    while (true) {
+        std::cout << "Enter Age: ";
+        if (std::cin >> age && age >= 0) {
+            break; // Exit loop if valid
+        } else {
+            std::cout << "Invalid input. Please enter a valid age." << std::endl;
+            std::cin.clear(); // Clear error state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+        }
+    }
+
+    // Enter gender with validation
+    while (true) {
+        std::cout << "Enter Gender (M/F): ";
+        if (std::cin >> gender && (gender == 'M' || gender == 'F')) {
+            break; // Exit loop if valid
+        } else {
+            std::cout << "Invalid input. Please enter a valid gender." << std::endl;
+            std::cin.clear(); // Clear error state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+        }
+    }
+
+    // Enter phone number with validation
+    while (true) {
+        std::cout << "Enter Phone Number (xxx-xxx-xxxx): ";
+        if (std::cin >> phoneNumber && validatePhoneNumberFormat(phoneNumber)) {
+            break; // Exit loop if valid
+        } else {
+            std::cout << "Invalid phone number format." << std::endl;
+            std::cin.clear(); // Clear error state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+        }
+    }
+
+    std::cout << "******************************************************" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
+
+    // Enter next of kin name
+    std::cout << "Enter Next of Kin Name: ";
+    getline(std::cin, nextOfKinName); // Use getline to allow spaces in the name
+
+    // Enter next of kin phone number with validation
+    while (true) {
+        std::cout << "Enter Next of Kin Phone Number (xxx-xxx-xxxx): ";
+        if (std::cin >> nextOfKinNumber && validatePhoneNumberFormat(nextOfKinNumber)) {
+            break; // Exit loop if valid
+        } else {
+            std::cout << "Invalid phone number format." << std::endl;
+            std::cin.clear(); // Clear error state
+            std::cin.ignore(std::numeric_limits<std ::streamsize>::max(), '\n'); // Ignore invalid input
+        }
+    }
+
+    std::cout << "******************************************************" << std::endl;
+
+    // Enter date of admission with validation
+    while (true) {
+        std::cout << "Enter Date of Admission (dd/mm/yyyy): ";
+        if (std::cin >> dateOfAdmission && validateDateFormat(dateOfAdmission)) {
+            break; // Exit loop if valid
+        } else {
+            std::cout << "Invalid date format." << std::endl;
+            std::cin.clear(); // Clear error state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+        }
+    }
+
+    // Enter date of release with validation
+    while (true) {
+        std::cout << "Enter Date of Release (dd/mm/yyyy): ";
+        if (std::cin >> dateOfRelease && validateDateFormat(dateOfRelease)) {
+            break; // Exit loop if valid
+        } else {
+            std::cout << "Invalid date format." << std::endl;
+            std::cin.clear(); // Clear error state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+        }
+    }
+
+    // Prompt for ward ID
+    std::cout << "Enter Ward ID: ";
+    std::cin >> wardID;
+
+    // Prompt for patient ID
+    std::cout << "Enter Patient ID: ";
+    std::cin >> patientId;
+
+    std::cout << "******************************************************" << std::endl;
+}
 void Patient::editPatientData() {
         int choice;
         std::string newValue;
@@ -312,67 +385,116 @@ void Patient::editPatientData() {
     outfile.close();
     std::cout << "Patient data updated successfully." << std::endl;    
     }
+/*
+ Function to save patient data to a text file.
+ This function creates a directory for the patient using their first name, last name, and patient ID,
+ and then writes the patient's details to a text file named "patient_data.txt" within that directory.
+
+ The function performs the following steps:
+ 1. Constructs the file path for the patient data file based on the patient's first name, last name, and patient ID.
+ 2. Ensures that the directory for storing the patient data exists by creating it using a system command.
+ 3. Opens the file for writing. If the file cannot be opened, an error message is displayed, and the function returns.
+ 4. Writes the patient's details (first name, last name, date of birth, age, gender, phone number, next of kin information,
+    admission and release dates, ward ID, and patient ID) to the file.
+ 5. Closes the file and confirms that the data has been saved successfully.
+*/
 void Patient::saveToFile() {
-        // Define the file path
+    // Define the file path
     std::string filePath = "Patient Data/" + firstName + " " + lastName + " " + patientId + "/patient_data.txt";
 
-        // Ensure the directory exists (manually)
-        std::string command = "mkdir \"Patient Data\\" + firstName + " " + lastName + " " + patientId + "\"";
-        system(command.c_str());
+    // Ensure the directory exists (manually)
+    std::string command = "mkdir \"Patient Data\\" + firstName + " " + lastName + " " + patientId + "\"";
+    system(command.c_str());
 
-            // Open the file for writing
-            std::ofstream outfile(filePath);
-            if (!outfile.is_open()) {
-                std::cerr << "Error: Unable to open file for writing.\n";
-                return;
-            }
-
-            // Write patient data to the file
-            outfile << "First Name: " << firstName << std::endl;
-            outfile << "Last Name: " << lastName << std::endl;
-            outfile << "Date of Birth: " << dob << std::endl;
-            outfile << "Age: " << age << std::endl;
-            outfile << "Gender: " << gender << std::endl;
-            outfile << "Phone Number: " << phoneNumber << std::endl;
-            outfile << "Next of Kin Name: " << nextOfKinName << std::endl;
-            outfile << "Next of Kin Phone Number: " << nextOfKinNumber << std::endl;
-            outfile << "Date of Admission: " << dateOfAdmission << std::endl;
-            outfile << "Date of Release: " << dateOfRelease << std::endl;
-            outfile << "Ward ID: " << wardID << std::endl;
-            outfile << "Patient ID: " << patientId << std::endl;
-
-            outfile.close();
-            std::cout << "Patient data saved to " << filePath << std::endl;
-        }
-void Patient::displayPatientData(const std::string& fn, const std::string& ln, const std::string& pId) {
-        //std::string firstName, lastName, patientId;
-
-        // Construct the file path based on the patient details
-        std::string filePath = "Patient Data/" + fn + " " + ln + " " + pId + "/patient_data.txt";
-
-        // Open the file for reading
-        std::ifstream infile(filePath);
-        try{
-            if (!infile.is_open()) {
-            std::cerr << "Error: Unable to open file for reading.\n";
-            return;
-            }
-        } catch (const std::exception &e){
-           std::cout<<e.what()<<std::endl; 
-        }
-
-        // Read and display the patient data
-        std::string line;
-        std::cout << "******************************************************" << std::endl;
-        std::cout << "Patient Data:" << std::endl;
-        while (getline(infile, line)) {
-            std::cout << line << std::endl;
-        }
-        std::cout << "******************************************************" << std::endl;
-
-        infile.close();
+    // Open the file for writing
+    std::ofstream outfile(filePath);
+    if (!outfile.is_open()) {
+        std::cerr << "Error: Unable to open file for writing.\n";
+        return; // Exit the function if the file cannot be opened
     }
 
+    // Write patient data to the file
+    outfile << "First Name: " << firstName << std::endl;
+    outfile << "Last Name: " << lastName << std::endl;
+    outfile << "Date of Birth: " << dob << std::endl;
+    outfile << "Age: " << age << std::endl;
+    outfile << "Gender: " << gender << std::endl;
+    outfile << "Phone Number: " << phoneNumber << std::endl;
+    outfile << "Next of Kin Name: " << nextOfKinName << std::endl;
+    outfile << "Next of Kin Phone Number: " << nextOfKinNumber << std::endl;
+    outfile << "Date of Admission: " << dateOfAdmission << std::endl;
+    outfile << "Date of Release: " << dateOfRelease << std::endl;
+    outfile << "Ward ID: " << wardID << std::endl;
+    outfile << "Patient ID: " << patientId << std::endl;
+
+    // Close the file
+    outfile.close();
+    std::cout << "Patient data saved to " << filePath << std::endl; // Confirm successful save
+}
+/*
+// Function to display patient data from a text file.
+// This function reads the patient data from a specified file and displays it to the console.
+// The file is identified using the patient's first name, last name, and patient ID.
+//
+// Parameters:
+// - fn: A constant reference to a string representing the patient's first name.
+// - ln: A constant reference to a string representing the patient's last name.
+// - pId: A constant reference to a string representing the patient's ID.
+//
+// The function performs the following steps:
+// 1. Constructs the file path for the patient data file based on the provided first name, last name, and patient ID.
+// 2. Attempts to open the file for reading. If the file cannot be opened, an error message is displayed, and the function returns.
+// 3. Reads the contents of the file line by line and displays each line to the console.
+// 4. Closes the file after reading the data.
+*/
+void Patient::displayPatientData(const std::string& fn, const std::string& ln, const std::string& pId) {
+    // Construct the file path based on the patient details
+    std::string filePath = "Patient Data/" + fn + " " + ln + " " + pId + "/patient_data.txt";
+
+    // Open the file for reading
+    std::ifstream infile(filePath);
+    try {
+        if (!infile.is_open()) {
+            std::cerr << "Error: Unable to open file for reading.\n";
+            return; // Exit the function if the file cannot be opened
+        }
+    } catch (const std::exception &e) {
+        std::cout << e.what() << std::endl; // Catch and display any exceptions
+    }
+
+    // Read and display the patient data
+    std::string line;
+    std::cout << "******************************************************" << std::endl;
+    std::cout << "Patient Data:" << std::endl;
+    while (getline(infile, line)) {
+        std::cout << line << std::endl; // Output each line of patient data
+    }
+    std::cout << "******************************************************" << std::endl;
+
+    infile.close(); // Close the file after reading
+}
+/*
+ Function to check if a patient exists based on their first and last name.
+ This function searches for a directory corresponding to the patient's first and last name
+ within the "Patient Data" directory. If a matching directory is found, the function returns true;
+ otherwise, it returns false.
+
+ Parameters:
+ - fn: A constant reference to a string representing the patient's first name.
+ - ln: A constant reference to a string representing the patient's last name.
+
+ Returns:
+ - A boolean value: true if a directory matching the patient's name exists, 
+   false otherwise.
+
+ The function performs the following steps:
+ 1. Defines the directory path where patient data is stored.
+ 2. Checks if the directory exists by attempting to open it.
+ 3. If the directory is successfully opened, it iterates through the files in the directory.
+ 4. For each file, it checks if the file name matches the provided first name and last name.
+ 5. If a match is found, the directory is closed, and the function returns true.
+ 6. If no match is found after checking all files, the directory is closed, and the function returns false.
+*/
 bool Patient::patientExist(const std::string& fn, const std::string& ln) const {
     // Define the directory path
     std::string dirPath = "Patient Data/";
@@ -392,13 +514,13 @@ bool Patient::patientExist(const std::string& fn, const std::string& ln) const {
                 if (secondSpacePos != std::string::npos) {
                     std::string lastName = fileName.substr(spacePos + 1, secondSpacePos - spacePos - 1);
                     if (name == fn && lastName == ln) {
-                        closedir(dir);
-                        return true;
+                        closedir(dir); // Close the directory before returning
+                        return true; // Patient exists
                     }
                 }
             }
         }
-        closedir(dir);
+        closedir(dir); // Close the directory after checking all entries
     }
-    return false;
+    return false; // Patient does not exist
 }

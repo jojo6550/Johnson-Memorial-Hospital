@@ -1,9 +1,24 @@
 #include "../Header Files/Staff.h"
-    
-    bool Staff::validatePhoneNumberFormat(const std::string& phoneNumber) {
-        std::regex phonePattern(R"(^\(\d{3}\)-\d{3}-\d{4}$)");
-        return regex_match(phoneNumber, phonePattern);
-    }
+/*
+ Function to validate the format of a phone number string.
+ The expected format is "(XXX)-XXX-XXXX", where:
+ - XXX is a three-digit area code enclosed in parentheses
+ - The area code is followed by a hyphen (-)
+ - The next three digits represent the local exchange code
+ - The local exchange code is followed by another hyphen (-)
+ - Finally, the last four digits represent the subscriber number
+
+ Parameters:
+ - phoneNumber: A constant reference to a string representing the phone number to be validated.
+
+ Returns:
+ - A boolean value: true if the phone number string matches the expected format, 
+   false otherwise.
+*/
+bool Staff::validatePhoneNumberFormat(const std::string& phoneNumber) {
+    std::regex phonePattern(R"(^\(\d{3}\)-\d{3}-\d{4}$)");
+    return regex_match(phoneNumber, phonePattern);
+}
     void Staff::setStaffInfo(){
         std::cout<<"******************************************************"<<std::endl;
         std::cout<<"Enter full name: ";
