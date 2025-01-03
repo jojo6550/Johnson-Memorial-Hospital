@@ -47,11 +47,15 @@ void Reception(){
                 //above is guv
                 if (patient.patientExist(patientFname, patientLname)){
                     patient.displayPatientData(patientFname, patientLname, pId);
-                    std::cin.get();
+                    std::cout << "\n Press Enter to continue...";
                     } else {
                         std::cout << "Patient not found\n";
                     }
+                std::cin.ignore();
+                std::cin.get();
                 break;
+            default:
+                std::cout << "Invalid command.";
                 
         }
     }

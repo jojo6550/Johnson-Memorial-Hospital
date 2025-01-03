@@ -1,22 +1,5 @@
 #include "../Header Files/Patient.h"
-/**
- * @brief Displays patient data from a file.
- *
- * This function prompts the user for patient details, constructs a file path,
- * reads the patient data from the file, and displays it to the console.
- *
- * @details The function performs the following steps:
- * 1. Prompts the user for patient's first name, last name, and ID.
- * 2. Constructs a file path based on the provided patient details.
- * 3. Attempts to open and read the patient data file.
- * 4. Displays the patient data if the file is successfully opened and read.
- * 5. Handles potential file opening errors using exception handling.
- *
- * @note This function does not take any parameters or return any value.
- *       It interacts directly with the user through console input/output.
- *
- * @throws std::exception If there's an error opening the file, which is caught and its message displayed.
- */
+
 bool Patient::validateDateFormat(const std::string& date) {
             std::regex pattern(R"(^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$)");
             return regex_match(date, pattern);

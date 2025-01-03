@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <dirent.h>
 #include <sys/types.h>
+#include <ctime>
 class Patient{
     private:
         std::string firstName, lastName, dob, 
