@@ -1,9 +1,3 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <limits>
-#include <regex>
-#include <cstdlib>
 #include "../Header Files/Patient.h"
 /**
  * @brief Displays patient data from a file.
@@ -27,108 +21,108 @@ bool Patient::validateDateFormat(const std::string& date) {
             std::regex pattern(R"(^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$)");
             return regex_match(date, pattern);
         }
-    bool Patient::validatePhoneNumberFormat(const std::string& phoneNumber) {
+bool Patient::validatePhoneNumberFormat(const std::string& phoneNumber) {
             std::regex phonePattern(R"(^\(\d{3}\)-\d{3}-\d{4}$)");
             return regex_match(phoneNumber, phonePattern);
         }
-    void Patient::setPatientData(){
-            std::cout<<"******************************************************"<<std::endl;
-            std::cout << "Enter First Name: ";
-            std::cin >> firstName;
-            std::cout << "Enter Last Name: ";
-            std::cin >> lastName;
-            //Enters date of birth
-            while (true){
-                std::cout << "Enter Date of Birth (dd/mm/yyyy): ";
-                if (std::cin>>dob && validateDateFormat(dob)){
-                    break;
-                } else {
-                    std::cout << "Invalid date format." <<std::endl;
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
+void Patient::setPatientData(){
+        std::cout<<"******************************************************"<<std::endl;
+        std::cout << "Enter First Name: ";
+        std::cin >> firstName;
+        std::cout << "Enter Last Name: ";
+        std::cin >> lastName;
+        //Enters date of birth
+        while (true){
+            std::cout << "Enter Date of Birth (dd/mm/yyyy): ";
+            if (std::cin>>dob && validateDateFormat(dob)){
+                break;
+            } else {
+                std::cout << "Invalid date format." <<std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
-            //Enter age
-            while(true){
-                std::cout << "Enter Age: ";
-                if(std::cin >> age && age >= 0){
-                    break;
-                } else {
-                    std::cout << "Invalid input. Please enter a valid age." << std::endl;
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-                
-            }
-            //Enter gender
-            while(true){
-                std::cout << "Enter Gender (M/F): ";
-                if (std::cin>> gender && (gender == 'M' || gender == 'F')){
-                    break;
-                } else {
-                    std::cout << "Invalid input. Please enter a valid gender." << std::endl;
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                }
-            }
-            //Enter phone number
-            while (true){
-            std::cout << "Enter Phone Number (xxx-xxx-xxxx): ";
-                if (std::cin >> phoneNumber && validatePhoneNumberFormat(phoneNumber)){
-                    break;
-                } else {
-                    std::cout << "Invalid date format." <<std::endl;
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-            }
-            std::cout<<"******************************************************"<<std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the entire input buffer
-            std::cout << "Enter Next of Kin Name: ";
-            getline(std::cin, nextOfKinName); // Now this will work correctly
-            
-            //Next of Kin Phone Number
-            while (true){
-                std::cout << "Enter Next of Kin Phone Number (xxx-xxx-xxxx): ";
-                if (std::cin >> nextOfKinNumber && validatePhoneNumberFormat(nextOfKinNumber)){
-                    break;
-                } else {
-                    std::cout << "Invalid phone number format." <<std::endl;
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-            }
-            std::cout<<"******************************************************"<<std::endl;
-
-
-            while (true){
-                std::cout << "Enter Date of Admission (dd/mm/yyyy): ";
-                if (std::cin>>dateOfAdmission && validateDateFormat(dateOfAdmission)){
-                    break;
-                } else {
-                    std::cout << "Invalid date format." <<std::endl;
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-            }
-            while (true){
-            std::cout << "Enter Date of Release (dd/mm/yyyy): ";
-                if (std::cin>>dateOfRelease && validateDateFormat(dateOfRelease)){
-                    break;
-                } else {
-                    std::cout << "Invalid date format." <<std::endl;
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-            }
-            std::cout << "Enter Ward ID: ";
-            std::cin >> wardID;
-            std::cout << "Enter Patient ID: ";
-            std::cin >> patientId;
-            std::cout<<"******************************************************"<<std::endl;
         }
-    void Patient::editPatientData() {
+        //Enter age
+        while(true){
+            std::cout << "Enter Age: ";
+            if(std::cin >> age && age >= 0){
+                break;
+            } else {
+                std::cout << "Invalid input. Please enter a valid age." << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+            
+        }
+        //Enter gender
+        while(true){
+            std::cout << "Enter Gender (M/F): ";
+            if (std::cin>> gender && (gender == 'M' || gender == 'F')){
+                break;
+            } else {
+                std::cout << "Invalid input. Please enter a valid gender." << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            }
+        }
+        //Enter phone number
+        while (true){
+        std::cout << "Enter Phone Number (xxx-xxx-xxxx): ";
+            if (std::cin >> phoneNumber && validatePhoneNumberFormat(phoneNumber)){
+                break;
+            } else {
+                std::cout << "Invalid phone number format." <<std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        }
+        std::cout<<"******************************************************"<<std::endl;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the entire input buffer
+        std::cout << "Enter Next of Kin Name: ";
+        getline(std::cin, nextOfKinName); // Now this will work correctly
+        
+        //Next of Kin Phone Number
+        while (true){
+            std::cout << "Enter Next of Kin Phone Number (xxx-xxx-xxxx): ";
+            if (std::cin >> nextOfKinNumber && validatePhoneNumberFormat(nextOfKinNumber)){
+                break;
+            } else {
+                std::cout << "Invalid phone number format." <<std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        }
+        std::cout<<"******************************************************"<<std::endl;
+
+
+        while (true){
+            std::cout << "Enter Date of Admission (dd/mm/yyyy): ";
+            if (std::cin>>dateOfAdmission && validateDateFormat(dateOfAdmission)){
+                break;
+            } else {
+                std::cout << "Invalid date format." <<std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        }
+        while (true){
+        std::cout << "Enter Date of Release (dd/mm/yyyy): ";
+            if (std::cin>>dateOfRelease && validateDateFormat(dateOfRelease)){
+                break;
+            } else {
+                std::cout << "Invalid date format." <<std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        }
+        std::cout << "Enter Ward ID: ";
+        std::cin >> wardID;
+        std::cout << "Enter Patient ID: ";
+        std::cin >> patientId;
+        std::cout<<"******************************************************"<<std::endl;
+    }
+void Patient::editPatientData() {
         int choice;
         std::string newValue;
         // Ask for patient details to locate the file
@@ -335,7 +329,7 @@ bool Patient::validateDateFormat(const std::string& date) {
     outfile.close();
     std::cout << "Patient data updated successfully." << std::endl;    
     }
-    void Patient::saveToFile() {
+void Patient::saveToFile() {
         // Define the file path
     std::string filePath = "Patient Data/" + firstName + " " + lastName + " " + patientId + "/patient_data.txt";
 
@@ -367,19 +361,11 @@ bool Patient::validateDateFormat(const std::string& date) {
             outfile.close();
             std::cout << "Patient data saved to " << filePath << std::endl;
         }
-    void Patient::displayPatientData() {
-        std::string firstName, lastName, patientId;
-
-        // Prompt the user for patient details
-        std::cout << "Enter Patient First Name: ";
-        std::cin >> firstName;
-        std::cout << "Enter Patient Last Name: ";
-        std::cin >> lastName;
-        std::cout << "Enter Patient ID: ";
-        std::cin >> patientId;
+void Patient::displayPatientData(const std::string& fn, const std::string& ln, const std::string& patientID) {
+        //std::string firstName, lastName, patientId;
 
         // Construct the file path based on the patient details
-        std::string filePath = "Patient Data/" + firstName + " " + lastName + " " + patientId + "/patient_data.txt";
+        std::string filePath = "Patient Data/" + fn + " " + ln + " " + getPatientId() + "/patient_data.txt";
 
         // Open the file for reading
         std::ifstream infile(filePath);
@@ -403,3 +389,40 @@ bool Patient::validateDateFormat(const std::string& date) {
 
         infile.close();
     }
+bool Patient::isNextOfKin(const std::string& n) const {
+    return n == nextOfKinName;
+}
+std::string getPatientId() const{
+    //add logic
+    return patientID;
+}
+
+bool Patient::patientExist(const std::string& fn, const std::string& ln) const {
+    // Define the directory path
+    std::string dirPath = "Patient Data/";
+
+    // Check if the directory exists
+    DIR* dir;
+    if ((dir = opendir(dirPath.c_str())) != NULL) {
+        // Iterate through the files in the directory
+        dirent* ent;
+        while ((ent = readdir(dir)) != NULL) {
+            // Check if the file name matches the provided first name and last name
+            std::string fileName = ent->d_name;
+            size_t spacePos = fileName.find(' ');
+            if (spacePos != std::string::npos) {
+                std::string name = fileName.substr(0, spacePos);
+                size_t secondSpacePos = fileName.find(' ', spacePos + 1);
+                if (secondSpacePos != std::string::npos) {
+                    std::string lastName = fileName.substr(spacePos + 1, secondSpacePos - spacePos - 1);
+                    if (name == fn && lastName == ln) {
+                        closedir(dir);
+                        return true;
+                    }
+                }
+            }
+        }
+        closedir(dir);
+    }
+    return false;
+}
