@@ -29,13 +29,13 @@ void Reception(){
         std::cout << "3.Request Patient Information\n";
         std::cout << "4.Exit\n";
         std::cin >> choice;
-        switch (choice) {
-            
+        switch (choice) {   
             case 1:
                 patient.setPatientData();
                 patient.saveToFile();
                 break;
             case 2:
+                std::cout << "Not implemented:\n";
                 break;
             case 3:
                 std::cout << "Enter patient First name: ";
@@ -44,7 +44,6 @@ void Reception(){
                 std::cin >> patientLname;
                 std::cout << "Enter patient ID: ";
                 std::cin >> pId;
-                //above is guv
                 if (patient.patientExist(patientFname, patientLname)){
                     patient.displayPatientData(patientFname, patientLname, pId);
                     std::cout << "\n Press Enter to continue...";
