@@ -10,3 +10,25 @@ A Medical Information System designed to store and organize patient medical info
 
 ## Purpose
 The system is intended to streamline hospital operations by providing a centralized platform for managing patient and staff data securely and efficiently.
+
+# Prerequisites
+- C++ compiler (e.g., GCC)
+- C++ Standard Library
+
+## Usage
+- Download:
+    Dowload all files as provided.
+
+- Set up and compile:
+    In terminal, nagivate to Johnson Memorial Hospital\src\
+
+    Copy and paste the following command 'g++ main.cpp Staff.cpp Patient.cpp Login.cpp -o hospital_system'
+
+- Execute:
+    Copy and paste the following command '.\hospital_system'
+
+
+# Inspiration:
+- geeksforgeeks.org:
+    https://www.geeksforgeeks.org/top-50-cpp-project-ideas-for-beginners-advanced/
+- Medical Information System
