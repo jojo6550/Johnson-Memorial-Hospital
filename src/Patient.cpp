@@ -361,11 +361,11 @@ void Patient::saveToFile() {
             outfile.close();
             std::cout << "Patient data saved to " << filePath << std::endl;
         }
-void Patient::displayPatientData(const std::string& fn, const std::string& ln, const std::string& patientID) {
+void Patient::displayPatientData(const std::string& fn, const std::string& ln, const std::string& pId) {
         //std::string firstName, lastName, patientId;
 
         // Construct the file path based on the patient details
-        std::string filePath = "Patient Data/" + fn + " " + ln + " " + getPatientId() + "/patient_data.txt";
+        std::string filePath = "Patient Data/" + fn + " " + ln + " " + pId + "/patient_data.txt";
 
         // Open the file for reading
         std::ifstream infile(filePath);
@@ -389,13 +389,6 @@ void Patient::displayPatientData(const std::string& fn, const std::string& ln, c
 
         infile.close();
     }
-bool Patient::isNextOfKin(const std::string& n) const {
-    return n == nextOfKinName;
-}
-std::string getPatientId() const{
-    //add logic
-    return patientID;
-}
 
 bool Patient::patientExist(const std::string& fn, const std::string& ln) const {
     // Define the directory path

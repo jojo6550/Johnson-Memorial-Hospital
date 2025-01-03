@@ -6,7 +6,9 @@
 #include "../Header Files/Staff.h"
 
 Patient patient;
-
+std::string patientFname;
+std::string patientLname;
+std::string pId;
 
 
 
@@ -17,7 +19,6 @@ int main(){
     return 0;
 }
 
-//add getID logic
 void Reception(){
     int choice;
     while (choice != 4){
@@ -37,25 +38,19 @@ void Reception(){
             case 2:
                 break;
             case 3:
-            
-                std::string fullName;
-                std::string patientFname;
-                std::string patientLname;
                 std::cout << "Enter patient First name: ";
                 std::cin >> patientFname;
                 std::cout << "Enter patient Last name: ";
                 std::cin >> patientLname;
+                std::cout << "Enter patient ID: ";
+                std::cin >> pId;
+                //above is guv
                 if (patient.patientExist(patientFname, patientLname)){
-                    std::cout << "Enter your full name: \n";
-                    if (patient.isNextOfKin(fullName)) {
-                        patient.displayPatientData(patientFname, patientLname, patient.getPatientId());
+                    patient.displayPatientData(patientFname, patientLname, pId);
+                    std::cin.get();
                     } else {
-                        std::cout << "You are not the next of kin\n";
-                        continue;
+                        std::cout << "Patient not found\n";
                     }
-                } else {
-                    std::cout << "Patient not found\n";
-                }
                 break;
                 
         }

@@ -31,9 +31,7 @@ class Patient{
     void setPatientData();
     void editPatientData();
     void saveToFile();
-    void displayPatientData(const std::string& fn, const std::string& ln,const std::string& patientID);
-    bool isNextOfKin(const std::string& n) const;
-    std::string getPatientId() const;
+    void displayPatientData(const std::string& fn, const std::string& ln,const std::string& pId);
     bool patientExist(const std::string& fn, const std::string& ln) const;
 
 };
