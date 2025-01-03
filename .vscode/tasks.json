@@ -6,7 +6,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-o", "src/main",
+                "-o", "src/Hospital",
                 "src/*.cpp"
             ],
             "group": {
