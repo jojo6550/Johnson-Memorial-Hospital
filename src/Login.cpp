@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <iostream>
 #include "../Header Files/Login.h"
 /**
  * @brief Registers a new user by prompting for username and password.
@@ -96,10 +95,10 @@ void Login::reg() {
     std::cout << "User  registered successfully!\n";
 }
 
-void Login::login() {
+bool Login::login() {
     std::string username, password;
     std::cout << "Enter username: ";
-    getline(std::cin, username);
+    std::cin >> username;
     std::cout << "Enter password: ";
     std::cin >> password;
     std::cin.ignore(); // Clear the input buffer
@@ -107,7 +106,6 @@ void Login::login() {
     std::ifstream infile("users.txt");
     if (!infile.is_open()) {
         std::cerr << "Error: Unable to open file 'users.txt' for reading.\n";
-        return;
     }
 
     std::string line;
@@ -117,7 +115,7 @@ void Login::login() {
         std::string fileUsername = line.substr(0, delimiter);
         std::string filePassword = line.substr(delimiter + 1);
 
-        if (fileUsername == username && filePassword == decrypt(password)) {
+        if (fileUsername == username && filePassword == encrypt(password)) {
             std::cout << "Login successful! Welcome, " << username << ".\n";
             loginSuccessful = true;
             break;
@@ -128,4 +126,5 @@ void Login::login() {
     if (!loginSuccessful) {
         std::cout << "Invalid username or password. Please try again.\n";
     }
+    return loginSuccessful;
 }

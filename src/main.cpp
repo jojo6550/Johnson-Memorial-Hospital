@@ -7,21 +7,39 @@
 #include "../Header Files/Staff.h"
 
 Patient patient;
+Login user;
 std::string patientFname;
 std::string patientLname;
 std::string pId;
 
 void Reception();
 int main(){
-    Reception();
+    int attempts = 1;
+    std::cout << "Welcome to the Hospital Management System!" << std::endl;
+    while (true){
+        if (user.login()){
+            Reception();
+            break;
+        } else {
+            attempts++;
+            if (attempts == 5){
+                std::cout << "Maximum attempts exceeded. Exiting..." << std::endl;
+                return false;
+            } else {
+                continue;
+            }
+        }
+    }
+
     return 0;
 }
 
 void Reception(){
     int choice;
     while (choice != 4){
+        std::cout<<"********************************\n";
         std::cout << "Welcome to the Reception Desk\n";
-        std::cout << "What would you like to do?\n";
+        std::cout<<"********************************\n";
         std::cout << "1.Check in Patient\n";
         std::cout << "2.Check out Patient\n";
         std::cout << "3.Request Patient Information\n";
@@ -56,8 +74,12 @@ void Reception(){
                 std::cin.ignore();
                 std::cin.get();
                 break;
+            case 4:
+                std::cout << "Good day!.\n";
+                break;
             default:
-                std::cout << "Invalid command.";
+                std::cout << "Invalid command\n";
+                continue;
                 
         }
     }
