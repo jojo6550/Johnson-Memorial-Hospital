@@ -6,8 +6,8 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-o", "src/Hospital",
-                "src/*.cpp"
+                "-o", "Hospital",
+                "src/*.cpp",
             ],
             "group": {
                 "kind": "build",

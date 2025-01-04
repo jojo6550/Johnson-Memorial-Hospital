@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 #include "../Header Files/Login.h"
 #include "../Header Files/Patient.h"
 #include "../Header Files/Staff.h"
@@ -9,9 +10,6 @@ Patient patient;
 std::string patientFname;
 std::string patientLname;
 std::string pId;
-
-
-
 
 void Reception();
 int main(){
@@ -28,7 +26,12 @@ void Reception(){
         std::cout << "2.Check out Patient\n";
         std::cout << "3.Request Patient Information\n";
         std::cout << "4.Exit\n";
-        std::cin >> choice;
+        if (!(std::cin >> choice)) {
+            std::cin.clear(); // Clear the error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            std::cout << "Invalid input. Please enter a number between 1 and 4.\n";
+            continue; // Skip the rest of the loop and prompt again
+        }
         switch (choice) {   
             case 1:
                 patient.setPatientData();
