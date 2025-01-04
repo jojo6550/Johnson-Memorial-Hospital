@@ -36,14 +36,13 @@ int main(){
 
 void Reception(){
     int choice;
-    while (choice != 4){
+    while (choice != 3){
         std::cout<<"********************************\n";
         std::cout << "Welcome to the Reception Desk\n";
         std::cout<<"********************************\n";
         std::cout << "1.Check in Patient\n";
-        std::cout << "2.Check out Patient\n";
-        std::cout << "3.Request Patient Information\n";
-        std::cout << "4.Exit\n";
+        std::cout << "2.Request Patient Information\n";
+        std::cout << "3.Exit\n";
         if (!(std::cin >> choice)) {
             std::cin.clear(); // Clear the error flag
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
@@ -56,9 +55,6 @@ void Reception(){
                 patient.saveToFile();
                 break;
             case 2:
-                std::cout << "Not implemented:\n";
-                break;
-            case 3:
                 std::cout << "Enter patient First name: ";
                 std::cin >> patientFname;
                 std::cout << "Enter patient Last name: ";
@@ -74,7 +70,7 @@ void Reception(){
                 std::cin.ignore();
                 std::cin.get();
                 break;
-            case 4:
+            case 3:
                 std::cout << "Good day!.\n";
                 break;
             default:
