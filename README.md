@@ -27,6 +27,8 @@ The system aims to enhance hospital operations by providing a centralized, secur
 - Execute:
     Copy and paste the following command '.\Hospital.exe'
 
+    Or double click 'Hospital.exe' in file explorer
+
 
 # Inspiration:
 - geeksforgeeks.org:
