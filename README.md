@@ -22,10 +22,10 @@ The system aims to enhance hospital operations by providing a centralized, secur
 - Set up and compile:
     In terminal, nagivate to Johnson Memorial Hospital\src\
 
-    Copy and paste the following command 'g++ main.cpp Staff.cpp Patient.cpp Login.cpp -o hospital_system'
+    Copy and paste the following command: g++ -o Hospital src/*.cpp
 
 - Execute:
-    Copy and paste the following command '.\hospital_system'
+    Copy and paste the following command '.\Hospital.exe'
 
 
 # Inspiration:
