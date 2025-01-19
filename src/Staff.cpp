@@ -24,7 +24,7 @@ bool Staff::validatePhoneNumberFormat(const std::string& phoneNumber) {
         std::cout<<"Enter full name: ";
         getline(std::cin, name);
         while(true){
-            std::cout<<"Role (d = Doctor, n = Nurse, a = auxillary): ";
+            std::cout<<"Role (d = Doctor, n = Nurse, a = auxiliary): ";
             if(std::cin>>role && (role == 'd' || role == 'n' || role == 'a'||role == 'D' || role == 'N' || role == 'A')){
                 break;
             } else {
@@ -77,7 +77,7 @@ bool Staff::validatePhoneNumberFormat(const std::string& phoneNumber) {
                     if(staffId[0] == 'A'){
                         break;
                     } else {
-                        std::cout << "This is an auxillary staff member, prefix must be N\n";
+                        std::cout << "This is an auxiliary staff member, prefix must be N\n";
                     }
                 }
                 
@@ -92,7 +92,7 @@ bool Staff::validatePhoneNumberFormat(const std::string& phoneNumber) {
                 
         }
         
-        std::cout<<"Select whichever appplies: "<< std::endl;
+        std::cout<<"Select whichever applies: "<< std::endl;
         size_t i;
         if (i != 0){
             if(std::cin >> i && i>qualificationsList.size()){
@@ -109,9 +109,9 @@ bool Staff::validatePhoneNumberFormat(const std::string& phoneNumber) {
     }
 void Staff::saveToFile() {
     // Define the file path
-    std::string filePathD = "Staff Data/Doctor_Data/" + name + " " + staffId + "/staff_data.txt";
-    std::string filePathN = "Staff Data/Nurse_Data/" + name + " " + staffId + "/nurse_data.txt";
-    std::string filePathA = "Staff Data/Auxillary_Data/" + name + " " + staffId + "/auxillary_data.txt";
+    std::string filePathD = "Staff Data/Doctor_Data/" + name + " " + staffId + ".txt";
+    std::string filePathN = "Staff Data/Nurse_Data/" + name + " " + staffId + ".txt";
+    std::string filePathA = "Staff Data/Auxiliary_Data/" + name + " " + staffId + ".txt";
 
     // Assign the correct file path based on role
     std::string filePath;
@@ -120,11 +120,9 @@ void Staff::saveToFile() {
     if (role == 'D' || role == 'd') {
         filePath = filePathD;
         prefix = "Dr. ";
-        command = "mkdir \"Staff Data\\Doctor_Data\\" + name + " " + staffId + "\"";
     } else if (role == 'N' || role == 'n') {
         filePath = filePathN;
         prefix = "Nurse ";
-        command = "mkdir \"Staff Data\\Nurse_Data\\" + name + " " + staffId + "\"";
     } else if (role == 'A' || role == 'a') {
         filePath = filePathA;
         if(gender == 'F') {
@@ -132,11 +130,7 @@ void Staff::saveToFile() {
         } else if (gender == 'M'){
             prefix = " Mr. ";
         }
-        command = "mkdir \"Staff Data\\Auxillary_Data\\" + name + " " + staffId + "\"";
     }
-
-    // Ensure the directory exists
-    system(command.c_str());
 
     // Open the file for writing
     std::ofstream outfile(filePath);
@@ -175,11 +169,11 @@ void Staff::displayStaffData() {
     // Assign the correct file path based on role
     std::string filePath;
     if (role == 'D' || role == 'd') {
-        filePath = "Staff Data/Doctor_Data/" + name + " " + staffId + "/staff_data.txt";
+        filePath = "Staff Data/Doctor_Data/" + name + " " + staffId + ".txt";
     } else if (role == 'N' || role == 'n') {
-        filePath = "Staff Data/Nurse_Data/" + name + " " + staffId + "/nurse_data.txt";
+        filePath = "Staff Data/Nurse_Data/" + name + " " + staffId + ".txt";
     } else if (role == 'A' || role == 'a') {
-        filePath = "Staff Data/Auxillary_Data/" + name + " " + staffId + "/auxillary_data.txt";
+        filePath = "Staff Data/Auxilary_Data/" + name + " " + staffId + ".txt";
     }
 
     // Open the file for reading

@@ -113,7 +113,7 @@ void Patient::setPatientData() {
 
     // Enter phone number with validation
     while (true) {
-        std::cout << "Enter Phone Number (xxx-xxx-xxxx): ";
+        std::cout << "Enter Phone Number (xxx)-xxx-xxxx: ";
         if (std::cin >> phoneNumber && validatePhoneNumberFormat(phoneNumber)) {
             break; // Exit loop if valid
         } else {
@@ -148,18 +148,6 @@ void Patient::setPatientData() {
     while (true) {
         std::cout << "Enter Date of Admission (dd/mm/yyyy): ";
         if (std::cin >> dateOfAdmission && validateDateFormat(dateOfAdmission)) {
-            break; // Exit loop if valid
-        } else {
-            std::cout << "Invalid date format." << std::endl;
-            std::cin.clear(); // Clear error state
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
-        }
-    }
-
-    // Enter date of release with validation
-    while (true) {
-        std::cout << "Enter Date of Release (dd/mm/yyyy): ";
-        if (std::cin >> dateOfRelease && validateDateFormat(dateOfRelease)) {
             break; // Exit loop if valid
         } else {
             std::cout << "Invalid date format." << std::endl;
@@ -216,7 +204,6 @@ void Patient::editPatientData() {
                 else if (key == "Next of Kin Name") nextOfKinName = value;
                 else if (key == "Next of Kin Phone Number") nextOfKinNumber = value;
                 else if (key == "Date of Admission") dateOfAdmission = value;
-                else if (key == "Date of Release") dateOfRelease = value;
                 else if (key == "Ward ID") wardID = value;
                 else if (key == "Patient ID") patientId = value;
             }
@@ -400,11 +387,7 @@ void Patient::editPatientData() {
 */
 void Patient::saveToFile() {
     // Define the file path
-    std::string filePath = "Patient Data/" + firstName + " " + lastName + " " + patientId + "/patient_data.txt";
-
-    // Ensure the directory exists (manually)
-    std::string command = "mkdir \"Patient Data\\" + firstName + " " + lastName + " " + patientId + "\"";
-    system(command.c_str());
+    std::string filePath = "Patient Data/" + firstName + " " + lastName + " " + patientId + ".txt";
 
     // Open the file for writing
     std::ofstream outfile(filePath);
@@ -449,7 +432,7 @@ void Patient::saveToFile() {
 */
 void Patient::displayPatientData(const std::string& fn, const std::string& ln, const std::string& pId) {
     // Construct the file path based on the patient details
-    std::string filePath = "Patient Data/" + fn + " " + ln + " " + pId + "/patient_data.txt";
+    std::string filePath = "Patient Data/" + fn + " " + ln + " " + pId + ".txt";
 
     // Open the file for reading
     std::ifstream infile(filePath);
