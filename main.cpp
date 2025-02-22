@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 #include <limits>
-#include "../Header Files/Login.h"
-#include "../Header Files/Patient.h"
-#include "../Header Files/Staff.h"
+#include "include/includer.hpp"
 
 Patient patient;
 Login user;
@@ -12,6 +10,7 @@ std::string patientLname;
 std::string pId;
 
 void Reception();
+void Admin();
 int main(){
     int attempts = 1;
     std::cout << "Welcome to the Hospital Management System!" << std::endl;
@@ -35,13 +34,13 @@ int main(){
 
 void Reception(){
     int choice;
-    while (choice != 3){
+    while (choice != 4){
         std::cout<<"********************************\n";
         std::cout << "Welcome to the Reception Desk\n";
         std::cout<<"********************************\n";
         std::cout << "1.Check in Patient\n";
         std::cout << "2.Request Patient Information\n";
-        std::cout << "3.Exit\n";
+        std::cout << "3.Administrator Controls\n";
         if (!(std::cin >> choice)) {
             std::cin.clear(); // Clear the error flag
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
@@ -78,7 +77,8 @@ void Reception(){
                 
         }
     }
+}
 
-
-
+void Admin(){
+    
 }

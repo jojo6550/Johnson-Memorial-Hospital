@@ -1,4 +1,4 @@
-#include "../include/Staff.hpp"
+#include "../include/Staff.h"
 /*
  Function to validate the format of a phone number string.
  The expected format is "(XXX)-XXX-XXXX", where:

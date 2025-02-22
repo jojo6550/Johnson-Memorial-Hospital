@@ -1,4 +1,4 @@
-#include "../include/Patient.hpp"
+#include "../include/Patient.h"
 /*
  Function to validate the format of a date string.
  The expected format is "DD/MM/YYYY", where:
